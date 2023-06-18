@@ -1,5 +1,5 @@
 def PROJECT_NAME = "${JOB_BASE_NAME}".replace("/", "_")
-def PROJECT_PATH = "/var/jenkins_home/workspace/Test"
+def PROJECT_PATH = "/var/jenkins_home/workspace"
 pipeline {
     agent { label 'master' }
     environment {
