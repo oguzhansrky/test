@@ -1,0 +1,83 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${DEPLOYMENT_NAME}
+  namespace: ${DEPLOYMENT_NAME}
+spec:
+  selector:
+    matchLabels:
+      app: ${DEPLOYMENT_NAME}-app
+      version: "1"
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ${DEPLOYMENT_NAME}-app
+        version: "1"
+    spec:
+      imagePullSecrets:
+      - name: ipsosregistry12
+      tolerations:
+      - key: "cattle.io/os"
+        operator: "Equal"
+        effect: "NoSchedule"
+        value: "linux"
+      containers:
+      - name: ${DEPLOYMENT_NAME}
+        image: 172.23.24.17:5000/${DEPLOYMENT_NAME}:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${DEPLOYMENT_NAME}-app-svc
+  namespace: ${DEPLOYMENT_NAME}
+spec:
+  selector:
+    app: ${DEPLOYMENT_NAME}-app
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ${DEPLOYMENT_NAME}-app-virtualhost
+  namespace: ${DEPLOYMENT_NAME}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  tls:
+  - hosts:
+    - 'cxarcelik.ipsos.com.tr'
+    secretName: ipsoscert
+  rules:
+  - host: cxarcelik.ipsos.com.tr
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ${DEPLOYMENT_NAME}-app-svc
+          servicePort: 80
