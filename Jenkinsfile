@@ -31,7 +31,7 @@ pipeline {
                     if (PROJECT_NAME == 'test') {
                         DATABASE_NAME=TEST_DB
                         DEPLOYMENT_NAME=TEST_DEPLOYMENT_NAME
-                    if (PROJECT_NAME == 'tofas-deneme') {
+                    } else if (PROJECT_NAME == 'tofas-deneme') {
                         DATABASE_NAME=TOFAS_DB
                         DEPLOYMENT_NAME=TOFAS_DEPLOYMENT_NAME
                     } else if (PROJECT_NAME == 'skoda-deneme') {
