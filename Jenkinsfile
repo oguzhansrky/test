@@ -1,7 +1,7 @@
 def PROJECT_NAME = "${JOB_BASE_NAME}".replace("/", "_")
 def PROJECT_PATH = "/var/jenkins_home/workspace/Test"
 pipeline {
-    agent { any }
+    agent any 
     environment {
         // -- TOFAS
         TOFAS_DB                = "tofasdb"
