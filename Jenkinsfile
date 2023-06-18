@@ -1,7 +1,7 @@
 def PROJECT_NAME = "${JOB_BASE_NAME}".replace("/", "_")
 def PROJECT_PATH = "/var/jenkins_home/workspace/Test"
 pipeline {
-    agent any 
+    agent { label 'master' }
     environment {
         // -- TOFAS
         TOFAS_DB                = "tofasdb"
@@ -14,6 +14,10 @@ pipeline {
         // -- ARCELIK
         ARCELIK_DB              = "arcelikdb"
         ARCELIK_DEPLOYMENT_NAME = "cxplus-arcelik"
+
+        // -- TEST
+        TEST_DB              = "testdb"
+        TEST_DEPLOYMENT_NAME = "cxplus-test"
     }
 
     // ----------------
@@ -24,6 +28,9 @@ pipeline {
                 echo 'Building Container..'
 
                 script {
+                    if (PROJECT_NAME == 'test') {
+                        DATABASE_NAME=TEST_DB
+                        DEPLOYMENT_NAME=TEST_DEPLOYMENT_NAME
                     if (PROJECT_NAME == 'tofas-deneme') {
                         DATABASE_NAME=TOFAS_DB
                         DEPLOYMENT_NAME=TOFAS_DEPLOYMENT_NAME
