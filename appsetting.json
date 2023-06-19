@@ -1,5 +1,5 @@
 "ConnectionStrings": {
-    "SurveyDev": "Data Source=10.164.2.59;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=SurveyModuleUser;Password=1p80sS9rv3yM0du13!2020;MultipleActiveResultSets=True",
-    "SurveyTest": "Data Source=213.155.123.156;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=SurveyModuleUser;Password=1p80sS9rv3yM0du13!2020;MultipleActiveResultSets=True",
-    "SurveyProd": "Data Source=172.23.24.18;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=sa;Password=5BKZLIJdodb6s22;MultipleActiveResultSets=True"
+    "SurveyDev": "Data Source=10.164.2.59;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=SurveyModuleUser;Password=test!2020;MultipleActiveResultSets=True",
+    "SurveyTest": "Data Source=213.155.123.156;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=SurveyModuleUser;Password=test!2020;MultipleActiveResultSets=True",
+    "SurveyProd": "Data Source=172.23.24.18;Initial Catalog=$DATABASE_NAME;Connection Timeout=30;User Id=sa;Password=test;MultipleActiveResultSets=True"
   }
