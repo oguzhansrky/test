@@ -71,10 +71,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - 'cxarcelik.ipsos.com.tr'
-    secretName: ipsoscert
+    - 'cxarcelik.test.com.tr'
+    secretName: test
   rules:
-  - host: cxarcelik.ipsos.com.tr
+  - host: cxarcelik.test.com.tr
     http:
       paths:
       - path: /
